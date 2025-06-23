@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Bienvenido, {{ Auth::user()->name }}</h2>
+    <h2 class="mb-4">Mis Proyectos</h2>
 
     <a href="{{ route('projects.create') }}" class="btn btn-primary mb-3">+ Nuevo Proyecto</a>
 
@@ -15,12 +15,11 @@
             @foreach($projects as $project)
                 <div class="list-group-item mb-2">
                     <h5 class="mb-1">{{ $project->name }}</h5>
-                    <p class="mb-1">{{ $project->description }}</p>
+                    <p>{{ $project->description }}</p>
                     <small>Inicio: {{ $project->start_date }}</small>
                     <div class="mt-2">
                         <a href="{{ route('projects.show', $project) }}" class="btn btn-sm btn-info">Ver</a>
                         <a href="{{ route('projects.edit', $project) }}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-primary">+ Tarea</a>
                         <form action="{{ route('projects.destroy', $project) }}" method="POST" class="d-inline">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este proyecto?')">Eliminar</button>
@@ -30,9 +29,7 @@
             @endforeach
         </div>
     @else
-        <div class="alert alert-info">
-            Aún no tienes proyectos. Usa el botón "Nuevo Proyecto" para comenzar.
-        </div>
+        <div class="alert alert-info">Aún no tienes proyectos creados.</div>
     @endif
 </div>
 @endsection
